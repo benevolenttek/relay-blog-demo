@@ -1,0 +1,505 @@
+# source: https://api.graph.cool/relay/v1/cj9essp89011s01179xni4p0w
+# timestamp: Tue Oct 31 2017 10:15:38 GMT-0400 (EDT)
+
+input CreateEntry {
+  title: String!
+}
+
+input CreateEntryInput {
+  title: String!
+  clientMutationId: String!
+}
+
+type CreateEntryPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  entry: Entry
+  edge: EntryEdge
+}
+
+input CreateUser {
+  dateOfBirth: DateTime
+  name: String
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+scalar DateTime
+
+input DeleteEntryInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteEntryPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  entry: Entry
+  edge: EntryEdge
+  deletedId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+  deletedId: ID
+}
+
+type Entry implements Node {
+  createdAt: DateTime!
+  id: ID!
+  title: String!
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type EntryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [EntryEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type EntryEdge {
+  # The item at the end of the edge.
+  node: Entry!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input EntryFilter {
+  # Logical AND on all given filters.
+  AND: [EntryFilter!]
+
+  # Logical OR on all given filters.
+  OR: [EntryFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  title: String
+
+  # All values that are not equal to given value.
+  title_not: String
+
+  # All values that are contained in given list.
+  title_in: [String!]
+
+  # All values that are not contained in given list.
+  title_not_in: [String!]
+
+  # All values less than the given value.
+  title_lt: String
+
+  # All values less than or equal the given value.
+  title_lte: String
+
+  # All values greater than the given value.
+  title_gt: String
+
+  # All values greater than or equal the given value.
+  title_gte: String
+
+  # All values containing the given string.
+  title_contains: String
+
+  # All values not containing the given string.
+  title_not_contains: String
+
+  # All values starting with the given string.
+  title_starts_with: String
+
+  # All values not starting with the given string.
+  title_not_starts_with: String
+
+  # All values ending with the given string.
+  title_ends_with: String
+
+  # All values not ending with the given string.
+  title_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+}
+
+enum EntryOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+# HelloPayload
+type HelloPayload {
+  message: String!
+}
+
+type Mutation {
+  createEntry(input: CreateEntryInput!): CreateEntryPayload
+  updateEntry(input: UpdateEntryInput!): UpdateEntryPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateEntry(input: UpdateOrCreateEntryInput!): UpdateOrCreateEntryPayload
+  updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteEntry(input: DeleteEntryInput!): DeleteEntryPayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  createUser(input: SignupUserInput!): CreateUserPayload!
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input SignupUserInput {
+  dateOfBirth: DateTime
+  name: String
+  clientMutationId: String!
+}
+
+input UpdateEntry {
+  id: ID!
+  title: String
+}
+
+input UpdateEntryInput {
+  id: ID!
+  title: String
+  clientMutationId: String!
+}
+
+type UpdateEntryPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  entry: Entry
+  edge: EntryEdge
+}
+
+input UpdateOrCreateEntryInput {
+  update: UpdateEntry!
+  create: CreateEntry!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateEntryPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  entry: Entry
+  edge: EntryEdge
+}
+
+input UpdateOrCreateUserInput {
+  update: UpdateUser!
+  create: CreateUser!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+input UpdateUser {
+  dateOfBirth: DateTime
+  id: ID!
+  name: String
+}
+
+input UpdateUserInput {
+  dateOfBirth: DateTime
+  id: ID!
+  name: String
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+type User implements Node {
+  dateOfBirth: DateTime
+  id: ID!
+  name: String
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input UserFilter {
+  # Logical AND on all given filters.
+  AND: [UserFilter!]
+
+  # Logical OR on all given filters.
+  OR: [UserFilter!]
+  dateOfBirth: DateTime
+
+  # All values that are not equal to given value.
+  dateOfBirth_not: DateTime
+
+  # All values that are contained in given list.
+  dateOfBirth_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  dateOfBirth_not_in: [DateTime!]
+
+  # All values less than the given value.
+  dateOfBirth_lt: DateTime
+
+  # All values less than or equal the given value.
+  dateOfBirth_lte: DateTime
+
+  # All values greater than the given value.
+  dateOfBirth_gt: DateTime
+
+  # All values greater than or equal the given value.
+  dateOfBirth_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+}
+
+enum UserOrderBy {
+  dateOfBirth_ASC
+  dateOfBirth_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allEntries(filter: EntryFilter, orderBy: EntryOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): EntryConnection!
+  allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user: User
+  Entry(id: ID): Entry
+  User(id: ID): User
+
+  # hello
+  hello(name: String): HelloPayload
+  id: ID!
+}

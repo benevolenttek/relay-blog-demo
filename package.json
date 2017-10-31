@@ -1,0 +1,31 @@
+{
+  "name": "with-relay-modern",
+  "version": "3.0.3",
+  "description": "Example of Next.js with Relay Modern SSR",
+  "scripts": {
+    "graphcool-init": "graphcool init --schema schema/init-schema.graphql",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "relay": "relay-compiler --src ./ --exclude **/.next/** **/node_modules/** **/test/**  **/__generated__/** --schema ./schema/schema.graphql",
+    "schema": "graphql get-schema dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "dotenv-webpack": "^1.5.4",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "^4.1.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-relay": "^1.2.0-rc.1"
+  },
+  "devDependencies": {
+    "babel-plugin-relay": "^1.1.0",
+    "graphcool": "^1.2.1",
+    "graphql-cli": "^1.0.0-beta.4",
+    "relay-compiler": "^1.2.0-rc.1",
+    "relay-devtools": "^1.4.0"
+  }
+}
